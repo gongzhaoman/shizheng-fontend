@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  frontend:
+    image: infrastructure-project-management-system
+    container_name: infrastructure-project-management-system
+    restart: unless-stopped
+    networks:
+      - nginx-proxy-manager-network
+
+networks:
+  nginx-proxy-manager-network:
+    external: true
