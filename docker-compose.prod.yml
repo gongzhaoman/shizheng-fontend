@@ -2,9 +2,14 @@ version: '3'
 
 services:
   frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: infrastructure-project-management-system
     container_name: infrastructure-project-management-system
     restart: unless-stopped
+    environment:
+      - NODE_ENV=production
     networks:
       - nginx-proxy-manager-network
 
