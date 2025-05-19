@@ -54,7 +54,9 @@ export default function ProjectList() {
         setLoading(true);
         try {
           const response = await fetch(
-            `http://localhost:3001/api/projects?page=1&pageSize=20`,
+            process.env.NODE_ENV === 'production'
+              ? `api/projects?page=1&pageSize=20`
+              : `http://localhost:3001/api/projects?page=1&pageSize=20`,
           );
           const data = await response.json();
           setProjects(data.data);
@@ -75,7 +77,9 @@ export default function ProjectList() {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:3001/api/projects?page=${page}&pageSize=20&keyword=${encodeURIComponent(searchTerm)}`,
+          process.env.NODE_ENV === 'production'
+            ? `api/projects?page=${page}&pageSize=20&keyword=${encodeURIComponent(searchTerm)}`
+            : `http://localhost:3001/api/projects?page=${page}&pageSize=20&keyword=${encodeURIComponent(searchTerm)}`,
         );
         const data = await response.json();
         setProjects(data.data);
