@@ -52,10 +52,15 @@ export default function ExcelUploader() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        process.env.NODE_ENV === 'production'
+          ? '/api/admin/upload'
+          : 'http://localhost:3001/api/admin/upload',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
 
       const result = await response.json();
 
